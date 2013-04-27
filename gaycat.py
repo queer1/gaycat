@@ -10,7 +10,7 @@ ansiterm = {
     'blue':     '\033[0;34',
     'indigo':   '\033[1;35',
     'violet':   '\033[0;35',
-    'normal':   '\0330;'
+    'normal':   '\033[0;'
 }
 
 """ Print character 'c' in a given color. """
@@ -30,5 +30,9 @@ if __name__ == '__main__':
         'violet'
     )
 
-
-quote = "Programming is hard.  Let's go rollerblading!"
+    if len(sys.argv) == 1:
+        quote = "Programming is hard.  Let's go rollerblading!"
+        
+        for c in range(len(quote)):
+            gayputc(quote[c], ansiterm[ordered_clist[c % len(ordered_clist)]])
+        print()
