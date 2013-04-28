@@ -35,6 +35,7 @@ def gayputc(char, color):
 
 def gaytest():
     gayputs('Programming is hard.  Let\'s go rollerblading!')
+    print()
 
 def gayputs(s):
     for c in range(len(s)):
