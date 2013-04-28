@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# (c) 2013 Dicksoft
+# (c) 2013 D**kSoft
 
-import sys
+import sys, time
 
 ansiterm = {
     'red':      '\033[0;31',
@@ -46,6 +46,21 @@ def gayversion():
 def gayhelp():
     pass
 
+def infinigay():
+    pad = 0
+    inc = 1
+    while(True):
+        sys.stdout.write(' '*pad)
+        gayputs('###'*len(ordered_clist))
+        print()
+        time.sleep(0.2)
+        if pad >= 10:
+            inc = -1
+        elif pad < 0:
+            inc = 1
+        pad += inc
+    
+
 def manhandle():
     gayputs('I don\'t know what to do with that.')
 
@@ -55,7 +70,8 @@ if __name__ == '__main__':
         {
             '-t': gaytest,
             '-v': gayversion,
-            '-h': gayhelp
+            '-h': gayhelp,
+            '-i': infinigay
         }.get(sys.argv[1], manhandle)()
 
     elif len(sys.argv) > 1 and sys.argv[1][0] != '-':
