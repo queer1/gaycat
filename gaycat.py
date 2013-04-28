@@ -14,32 +14,49 @@ ansiterm = {
     'normal':   '\033[0;'
 }
 
+ordered_clist = (
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'indigo',
+    'violet'
+)
+
 """ Print character 'c' in a given color. """
 def gayputc(char, color):
     sys.stdout.write("%sm" % color)
     sys.stdout.write(char)
     sys.stdout.write("%sm" % ansiterm['normal'])
 
-if __name__ == '__main__':
-    ordered_clist = (
-        'red',
-        'orange',
-        'yellow',
-        'green',
-        'blue',
-        'indigo',
-        'violet'
-    )
+def gaytest():
+    gayputs('Programming is hard.  Let\'s go rollerblading!')
 
-    if len(sys.argv) > 1 and sys.argv[1] == '-t':
-        quote = "Programming is hard.  Let's go rollerblading!"
-        
-        for c in range(len(quote)):
-            gayputc(quote[c], ansiterm[ordered_clist[c % len(ordered_clist)]])
-        print()
+def gayputs(s):
+    for c in range(len(s)):
+        gayputc(s[c], ansiterm[ordered_clist[c % len(ordered_clist)]])
+
+def gayversion():
+    pass
+
+def gayhelp():
+    pass
+
+def manhandle():
+    gayputs('I don\'t know what to do with that.')
+
+if __name__ == '__main__':
+
+    if len(sys.argv) > 1 and sys.argv[1][0] == '-':
+        {
+            '-t': gaytest,
+            '-v': gayversion,
+            '-h': gayhelp
+        }.get(sys.argv[1], manhandle)()
+
+    elif len(sys.argv) > 1 and sys.argv[1][0] != '-':
+        pass
     else:
         for line in sys.stdin:
-            c = 0
-            for ch in line:
-                gayputc(line[c], ansiterm[ordered_clist[c % len(ordered_clist)]])
-                c += 1
+            gayputs(line)
