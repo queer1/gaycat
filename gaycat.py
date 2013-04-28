@@ -29,6 +29,7 @@ def gayputc(char, color):
     sys.stdout.write("%sm" % color)
     sys.stdout.write(char)
     sys.stdout.write("%sm" % ansiterm['normal'])
+    sys.stdout.flush()
 
 def gaytest():
     gayputs('Programming is hard.  Let\'s go rollerblading!')
@@ -36,6 +37,8 @@ def gaytest():
 def gayputs(s):
     for c in range(len(s)):
         gayputc(s[c], ansiterm[ordered_clist[c % len(ordered_clist)]])
+        sys.stdout.write('%sm' % ansiterm['normal'])
+        sys.stdout.flush()
 
 def gayversion():
     pass
