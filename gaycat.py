@@ -3,6 +3,8 @@
 
 import sys, time
 
+VERSION = {'major':1, 'minor':0, 'micro':0, 'releaselevel':'beta'}
+
 ansiterm = {
     'red':      '\033[0;31',
     'orange':   '\033[0;33',
@@ -41,10 +43,14 @@ def gayputs(s):
         sys.stdout.flush()
 
 def gayversion():
-    pass
+    gayputs('%s.%s.%s %s' % \
+            (VERSION['major'], VERSION['minor'],\
+             VERSION['micro'], VERSION['releaselevel']))
+    print()
 
 def gayhelp():
-    pass
+    gayputs('No one can help you.')
+    print()
 
 def infinigay():
     pad = 0
@@ -65,6 +71,9 @@ def manhandle():
     gayputs('I don\'t know what to do with that.')
 
 if __name__ == '__main__':
+    if sys.version_info <= (3,0):
+        print('Sorry, this program requires at least Python 3.0')
+        sys.exit(1)
 
     if len(sys.argv) > 1 and sys.argv[1][0] == '-':
         {
@@ -75,7 +84,11 @@ if __name__ == '__main__':
         }.get(sys.argv[1], manhandle)()
 
     elif len(sys.argv) > 1 and sys.argv[1][0] != '-':
-        pass
+        for fname in sys.argv[1:]:
+            f = open(fname, mode='r', encoding='utf-8')
+            for line in f:
+                gayputs(line)
+            f.close()
     else:
         for line in sys.stdin:
             gayputs(line)
