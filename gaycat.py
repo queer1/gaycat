@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# (c) 2013 Dicksoft
 
 import sys
 
@@ -30,9 +31,15 @@ if __name__ == '__main__':
         'violet'
     )
 
-    if len(sys.argv) == 1:
+    if len(sys.argv) > 1 and sys.argv[1] == '-t':
         quote = "Programming is hard.  Let's go rollerblading!"
         
         for c in range(len(quote)):
             gayputc(quote[c], ansiterm[ordered_clist[c % len(ordered_clist)]])
         print()
+    else:
+        for line in sys.stdin:
+            c = 0
+            for ch in line:
+                gayputc(line[c], ansiterm[ordered_clist[c % len(ordered_clist)]])
+                c += 1
